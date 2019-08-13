@@ -2,28 +2,23 @@ import 'package:equatable/equatable.dart';
 import 'package:testbloc/service_action_bean.dart';
 
 abstract class BaseServiceState extends Equatable {
-
   BaseServiceState([List props = const []]) : super(props);
-
 }
 
 class ServiceActionState extends BaseServiceState {
-  ServiceActionState(this.actionBean);
+  ServiceActionState(this.actionBean) : super([actionBean]);
 
-  ServiceActionBean actionBean;
-
-  factory ServiceActionState.update(ServiceActionBean actionBean) {
-    return ServiceActionState(actionBean);
-  }
+  final ServiceActionBean actionBean;
 
   factory ServiceActionState.empty() {
-    ServiceActionBean actionBean = ServiceActionBean();
-    actionBean.warranty = false;
-    actionBean.charge = false;
-    actionBean.servicePart = false;
-    actionBean.camera = false;
-    actionBean.materialPart = false;
-
-    return ServiceActionState(actionBean);
+    return ServiceActionState(
+      ServiceActionBean(
+        warranty: false,
+        charge: false,
+        servicePart: false,
+        camera: false,
+        materialPart: false,
+      ),
+    );
   }
 }
